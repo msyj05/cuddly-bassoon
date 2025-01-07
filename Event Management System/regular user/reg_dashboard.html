@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+         /* Joined Events */
+    .joined-events {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        margin-top: 15px;
+    }
+
+    .joined-event {
+        background-color: white;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 15px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        position: relative;
+    }
+
+    .joined-event h3 {
+        color: #0077cc;
+        margin-bottom: 10px;
+    }
+
+    .joined-event button {
+        padding: 8px 12px;
+        background-color: #ff4d4d;
+        color: white;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+        font-size: 14px;
+        position: absolute;
+        top: 15px;
+        right: 15px;
+    }
+
+    .joined-event button:hover {
+        background-color: #cc0000;
+    }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Event Management System</h1>
+        <nav>
+            <a href="reg_home.html">Home</a>
+            <a href="reg_dashboard.html" class="active">Dashboard</a>
+            <a href="reg_events.html">Browse Events</a>
+            <a href="#" id="logout">Logout</a>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>Welcome, [Username]</h2>
+            <h3>Your Joined Events</h3>
+            <div class="joined-events" id="joinedEventsContainer">
+                <!-- Joined events will be populated here -->
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Event Management System</p>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            loadJoinedEvents();
+
+            // Logout functionality
+            document.getElementById('logout').addEventListener('click', function() {
+                window.location.href = '/login.html';
+            });
+        });
+
+        // Load joined events
+        function loadJoinedEvents() {
+            const joinedEvents = JSON.parse(localStorage.getItem('joinedEvents')) || [];
+            const joinedEventsContainer = document.getElementById('joinedEventsContainer');
+
+            // Clear the container first
+            joinedEventsContainer.innerHTML = '';
+
+            if (joinedEvents.length > 0) {
+                joinedEvents.forEach((event, index) => {
+                    const eventDiv = document.createElement('div');
+                    eventDiv.classList.add('joined-event');
+                    eventDiv.innerHTML = `
+                        <h3>${event}</h3>
+                        <button onclick="leaveEvent(${index})">Leave Event</button>
+                    `;
+                    joinedEventsContainer.appendChild(eventDiv);
+                });
+            } else {
+                joinedEventsContainer.innerHTML = '<p>You have not joined any events yet.</p>';
+            }
+        }
+
+        // Leave event functionality
+        function leaveEvent(eventIndex) {
+            let joinedEvents = JSON.parse(localStorage.getItem('joinedEvents')) || [];
+            const eventName = joinedEvents[eventIndex];
+            joinedEvents.splice(eventIndex, 1); // Remove the event from the list
+            localStorage.setItem('joinedEvents', JSON.stringify(joinedEvents));
+            alert(`You have successfully left the event: ${eventName}`);
+            loadJoinedEvents(); // Refresh the joined events list
+        }
+    </script>
+</body>
+</html>

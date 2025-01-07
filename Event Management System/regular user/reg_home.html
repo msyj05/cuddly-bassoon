@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Management System</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Event Management System</h1>
+        <nav>
+            <a href="reg_home.html" class="active">Home</a>
+            <a href="reg_dashboard.html">Dashboard</a>
+            <a href="reg_events.html">Browse Events</a>
+            <a href="#" id="logout">Logout</a>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>Welcome to the Event Management System</h2>
+            <p>Your one-stop platform for creating and joining exciting events.</p>
+        </section>
+        
+        <section id="upcoming-events">
+            <h2>Upcoming Events</h2>
+            <div class="event-item">
+                <h3>Tech Conference 2025</h3>
+                <p><strong>Date:</strong> 2025-03-15</p>
+                <p><strong>Location:</strong> Accra International Center</p>
+            </div>
+            <div class="event-item">
+                <h3>Music Festival</h3>
+                <p><strong>Date:</strong> 2025-03-20</p>
+                <p><strong>Location:</strong> Kwame Nkrumah Park</p>
+            </div>
+            <div class="event-item">
+                <h3>Blockchain Conference</h3>
+                <p><strong>Date:</strong> 2025-04-25</p>
+                <p><strong>Location:</strong> Crypto Center Auditorium</p>
+            </div>
+            <div class="event-item">
+                <h3>Photography Workshop</h3>
+                <p><strong>Date:</strong> 2025-04-10</p>
+                <p><strong>Location:</strong> Artscape Gallery</p>
+            </div>
+                <div class="event-item">
+                <h3>Digital Marketing Summit</h3>
+                <p><strong>Date:</strong> 2025-04-05</p>
+                <p><strong>Location:</strong> Online</p>
+            </div>
+            
+        </section>
+
+        <section id="recent-events">
+            <h2>Recently Passed Events</h2>
+            <div class="event-item">
+                <h3>Event 1: Coding Bootcamp</h3>
+                <p>Date: 2023-12-15</p>
+                <p>Location: Kumasi Tech Hub</p>
+            </div>
+            <div class="event-item">
+                <h3>Event 2: Art Exhibition</h3>
+                <p>Date: 2023-12-20</p>
+                <p>Location: National Theatre</p>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Event Management System</p>
+    </footer>
+    <script>
+        // Logout functionality
+        document.getElementById('logout').addEventListener('click', function() {
+        window.location.href = '/login.html';
+        });
+    </script>
+</body>
+</html>

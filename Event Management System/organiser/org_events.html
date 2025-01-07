@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Events</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<style>
+    /* Event Listings */
+.event-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 15px;
+}
+
+.event {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+.event h3 {
+    color: #0077cc;
+    margin-bottom: 5px;
+}
+
+.event p {
+    margin: 5px 0;
+    color: #555;
+}
+
+.event button {
+    padding: 10px;
+    background-color: #0077cc;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.event button:hover {
+    background-color: #005fa3;
+}
+</style>
+<body>
+    <header>
+        <h1>Event Management System</h1>
+        <nav>
+            <a href="org_home.html">Home</a>
+            <a href="org_dashboard.html">Dashboard</a>
+            <a href="org_create_event.html">Create Event</a>
+            <a href="org_events.html" class="active">Browse Events</a>
+            <a href="#" id="logout">Logout</a>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>Upcoming Events</h2>
+            <div class="event-list" id="eventList"></div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 Event Management System</p>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Hardcoded existing events
+            const hardcodedEvents = [
+                {
+                    title: "Tech Conference 2025",
+                    date: "2025-03-15",
+                    time: "10:00 AM",
+                    description: "Explore the future of technology with industry experts."
+                },
+                {
+                    title: "Music Festival",
+                    date: "2025-03-20",
+                    time: "6:00 PM",
+                    description: "An evening of music, fun, and entertainment."
+                },
+                {
+                    title: "Blockchain Conference",
+                    date: "2025-04-25",
+                    time: "10:00 AM",
+                    description: "Explore the latest advancements and opportunities in blockchain technology."
+                },
+                {
+                    title: "Photography Workshop",
+                    date: "2025-04-10",
+                    time: "3:00 PM",
+                    description: "Enhance your skills with hands-on photography sessions led by professionals."
+                },
+                {
+                    title: "Digital Marketing Summit",
+                    date: "2025-04-05",
+                    time: "11:00 AM",
+                    description: "Learn strategies to boost your brand presence in the digital space."
+                }
+            ];
+
+            // Retrieve dynamic events from localStorage
+            const dynamicEvents = JSON.parse(localStorage.getItem('events')) || [];
+
+            // Combine hardcoded events with dynamic events
+            const allEvents = [...hardcodedEvents, ...dynamicEvents];
+
+            const eventList = document.getElementById('eventList');
+
+            // Dynamically create event cards
+            allEvents.forEach(event => {
+                const eventCard = document.createElement('div');
+                eventCard.classList.add('event');
+
+                eventCard.innerHTML = `
+                    <h3>${event.title}</h3>
+                    <p><strong>Date:</strong> ${event.date}</p>
+                    <p><strong>Time:</strong> ${event.time}</p>
+                    <p>${event.description}</p>
+                    <button onclick="joinEvent('${event.title}')">Join Event</button>
+                `;
+
+                eventList.appendChild(eventCard);
+            });
+        });
+
+        function joinEvent(eventTitle) {
+            // Retrieve joined events from localStorage
+            let joinedEvents = JSON.parse(localStorage.getItem('joinedEvents')) || [];
+
+            // Check if the event is already joined
+            if (joinedEvents.includes(eventTitle)) {
+                alert('You have already joined this event.');
+                return;
+            }
+
+            // Add the event to joined events and save to localStorage
+            joinedEvents.push(eventTitle);
+            localStorage.setItem('joinedEvents', JSON.stringify(joinedEvents));
+
+            alert(`You have successfully joined the event: ${eventTitle}`);
+        }
+
+        // Logout functionality
+        document.getElementById('logout').addEventListener('click', function() {
+            window.location.href = '/login.html';
+        });
+    </script>
+</body>
+</html>
