@@ -80,7 +80,7 @@
             loadJoinedEvents();
 
             // Retrieve username from localStorage
-                const username = localStorage.getItem('username');
+            const username = localStorage.getItem('currentUser') || "Guest";
 
             // Display username on the dashboard
             const usernameElement = document.querySelector('h2'); 
@@ -88,6 +88,7 @@
 
             // Logout functionality
             document.getElementById('logout').addEventListener('click', function() {
+                localStorage.removeItem('currentUser'); // Clear username on logout
                 window.location.href = '/login.html';
             });
         });

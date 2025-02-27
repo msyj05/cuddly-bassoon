@@ -153,6 +153,9 @@
     
             if (user) {
                 alert('Login successful!');
+
+                // Store the logged-in username in localStorage
+                localStorage.setItem('currentUser', user.username);
     
                 // Redirect based on role
                 if (user.role === 'user') {
