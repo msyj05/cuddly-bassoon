@@ -64,6 +64,25 @@
             <h2>Upcoming Events</h2>
             <div class="event-list" id="eventList"></div>
         </section>
+        <section>
+            <h2>Recently Passed Events</h2>
+            <div class="event-list">
+                <div class="event">
+                    <h3>Startup Pitch Night</h3>
+                    <p><strong>Date:</strong> 2024-02-25</p>
+                    <p><strong>Time:</strong> 5:00 PM</p>
+                    <p><strong>Location:</strong> Ashesi University Auditorium</p>
+                    <p>Innovative startups pitched their ideas to potential investors.</p>
+                </div>
+                <div class="event">
+                    <h3>Art Workshop</h3>
+                    <p><strong>Date:</strong> 2024-02-18</p>
+                    <p><strong>Time:</strong> 2:00 PM</p>
+                    <p><strong>Location:</strong> Kumasi Cultural Center</p>
+                    <p>A hands-on workshop for aspiring artists.</p>
+                </div>
+            </div>
+        </section>
     </main>
     <footer>
         <p>&copy; 2024 Event Management System</p>
@@ -103,12 +122,17 @@
                     description: "Learn strategies to boost your brand presence in the digital space."
                 }
             ];
+            const dynamicEvents = JSON.parse(localStorage.getItem('createdEvents')) || [];
+           // Combine hardcoded events with dynamic events
+           const allEvents = [...hardcodedEvents, ...dynamicEvents];
 
+            console.log("Dynamic events: ",dynamicEvents)
+            console.log("All Events events: ",allEvents)
             // Retrieve dynamic events from localStorage
-            const dynamicEvents = JSON.parse(localStorage.getItem('events')) || [];
+           
 
-            // Combine hardcoded events with dynamic events
-            const allEvents = [...hardcodedEvents, ...dynamicEvents];
+            console.log("New event")
+            console.log(dynamicEvents)
 
             const eventList = document.getElementById('eventList');
 
